@@ -9,13 +9,13 @@ import java.util.List;
 public class ExampleService {
 
     @Autowired
-    private ExampleRepository exampleRepository;
+    private MessageRepository exampleRepository;
 
-    public List<Example> getAllExamples() {
+    public List<Message> getAllExamples() {
         return exampleRepository.findAll();
     }
 
-    public Example saveExample(Example example) {
+    public Message saveExample(Message example) {
         return exampleRepository.save(example);
     }
 }

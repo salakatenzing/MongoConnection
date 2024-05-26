@@ -1,22 +1,29 @@
 package org.example;
 
-import org.example.ExampleRepository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
+
 @RestController
-@RequestMapping("/examples")
-public class ExampleController {
+@RequestMapping("/chat")
+public class MessageController {
 
     @Autowired
-    private ExampleRepository repository;
+    private MessageRepository repository;
 
     @PostMapping
-    public Example addExample(@RequestBody Example example) {
+    public Message addExample(@RequestBody Message example) {
         return repository.save(example);
     }
 
+    @GetMapping
+    public List<Message> getAllExamples() {
+        return repository.findAll();
+    }
+
     @GetMapping("/{id}")
-    public Example getExample(@PathVariable String id) {
+    public Message getExample(@PathVariable String id) {
         return repository.findById(id).orElse(null);
     }
 
