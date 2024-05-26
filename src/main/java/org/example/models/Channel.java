@@ -3,32 +3,20 @@ package org.example.models;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 @Document
 public class Channel {
     @Id
     private String id;
-    private String content;
-    private String senderId;
-    private String channelId;
+    private String name;
+    private List<String> messageIds;
 
-
-    // Constructors
-    public Channel() {
+    public Channel() {}
+    public Channel(String name){
+        this.name = name;
     }
 
-    public Channel(String content, String channelId) {
-        this.content = content;
-        this.channelId = channelId;
-    }
-
-    public Channel(String content, String senderId, String channelId) {
-        this.content = content;
-        this.senderId = senderId;
-        this.channelId = channelId;
-
-    }
-
-    // Getters and Setters
     public String getId() {
         return id;
     }
@@ -37,38 +25,19 @@ public class Channel {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getName() {
+        return name;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getSenderId() {
-        return senderId;
+    public List<String> getMessageIds() {
+        return messageIds;
     }
 
-    public void setSenderId(String senderId) {
-        this.senderId = senderId;
-    }
-
-    public String getChannelId() {
-        return channelId;
-    }
-
-    public void setChannelId(String channelId) {
-        this.channelId = channelId;
-    }
-
-    // toString method for debugging
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id='" + id + '\'' +
-                ", content='" + content + '\'' +
-                ", senderId='" + senderId + '\'' +
-                ", chatRoomId='" + channelId + '\'' +
-                '}';
+    public void setMessageIds(List<String> messageIds) {
+        this.messageIds = messageIds;
     }
 }

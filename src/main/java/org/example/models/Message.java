@@ -11,8 +11,6 @@ public class Message {
     private String senderId;
     private String channelId;
 
-    // Getters and setters
-
 
     public Message() {
     }
@@ -24,8 +22,8 @@ public class Message {
 
     }
 
-    public Message(String messageContent, String channelId) {
-        this.content = messageContent;
+    public Message(String content, String channelId) {
+        this.content = content;
         this.channelId = channelId;
     }
 
