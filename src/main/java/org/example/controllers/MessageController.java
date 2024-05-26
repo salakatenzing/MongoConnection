@@ -1,5 +1,7 @@
-package org.example;
+package org.example.controllers;
 
+import org.example.repository.MessageRepository;
+import org.example.models.Message;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,12 +15,12 @@ public class MessageController {
     private MessageRepository repository;
 
     @PostMapping
-    public Message addExample(@RequestBody Message example) {
+    public Message createMessage(@RequestBody Message example) {
         return repository.save(example);
     }
 
     @GetMapping
-    public List<Message> getAllExamples() {
+    public List<Message> getAllMessages() {
         return repository.findAll();
     }
 

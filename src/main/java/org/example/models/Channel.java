@@ -1,26 +1,30 @@
-package org.example;
+package org.example.models;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document
-public class Message {
+public class Channel {
     @Id
     private String id;
     private String content;
     private String senderId;
-    private String chatRoomId;
-
-    // Getters and setters
+    private String channelId;
 
 
-    public Message() {
+    // Constructors
+    public Channel() {
     }
 
-    public Message(String content, String senderId, String chatRoomId) {
+    public Channel(String content, String channelId) {
+        this.content = content;
+        this.channelId = channelId;
+    }
+
+    public Channel(String content, String senderId, String channelId) {
         this.content = content;
         this.senderId = senderId;
-        this.chatRoomId = chatRoomId;
+        this.channelId = channelId;
 
     }
 
@@ -49,15 +53,13 @@ public class Message {
         this.senderId = senderId;
     }
 
-    public String getChatRoomId() {
-        return chatRoomId;
+    public String getChannelId() {
+        return channelId;
     }
 
-    public void setChatRoomId(String chatRoomId) {
-        this.chatRoomId = chatRoomId;
+    public void setChannelId(String channelId) {
+        this.channelId = channelId;
     }
-
-
 
     // toString method for debugging
     @Override
@@ -66,7 +68,7 @@ public class Message {
                 "id='" + id + '\'' +
                 ", content='" + content + '\'' +
                 ", senderId='" + senderId + '\'' +
-                ", chatRoomId='" + chatRoomId + '\'' +
+                ", chatRoomId='" + channelId + '\'' +
                 '}';
     }
 }
