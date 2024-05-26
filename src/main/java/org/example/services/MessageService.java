@@ -39,6 +39,11 @@ public class MessageService {
         // Additional processing logic
     }
 
+    public void receiveAndPublishMessage(Message message) {
+        String messageJson = convertMessageToJson(message);
+        kafkaTemplate.send("chat-messages", message.getChannelId(), messageJson);
+    }
+
     public List<Message> getMessagesByChannelId(String channelId) {
         return messageRepository.findByChannelId(channelId);
     }

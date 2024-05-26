@@ -1,10 +1,8 @@
 package org.example.controllers;
 
-import org.example.models.Message;
-import org.example.services.MessageService;
+import org.example.models.Channel;
+import org.example.services.ChannelService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,22 +12,30 @@ import java.util.List;
 public class ChannelController {
 
     @Autowired
-    private MessageService messageService;
+    private ChannelService channelService;
 
-    // Endpoint to post a new message to a specific channel
-    @PostMapping("/{channelId}/messages")
-    public ResponseEntity<?> postMessage(@PathVariable String channelId, @RequestBody Message message) {
-        // Ensure the channelId is correctly set on the message before sending
-        message.setChannelId(channelId);
-        messageService.sendMessage(message.getContent(), message.getSenderId(), channelId);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Message sent successfully");
+    @GetMapping
+    public List<Channel> getAllChannels() {
+        return channelService.findAll();
     }
 
-    // Assuming you might want to implement fetching messages for a channel if needed
-    @GetMapping("/{channelId}/messages")
-    public ResponseEntity<?> getMessagesByChannel(@PathVariable String channelId) {
-        // This method needs to be implemented in MessageService to fetch messages by channelId
-        List<Message> messages = messageService.getMessagesByChannelId(channelId);
-        return ResponseEntity.ok(messages);
+    @GetMapping("/{id}")
+    public Channel getChannelById(@PathVariable String id) {
+        return channelService.findById(id);
+    }
+
+    @PostMapping
+    public Channel createChannel(@RequestBody Channel channel) {
+        return channelService.create(channel);
+    }
+
+    @PutMapping("/{id}")
+    public Channel updateChannel(@PathVariable String id, @RequestBody Channel channel) {
+        return channelService.update(id, channel);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteChannel(@PathVariable String id) {
+        channelService.delete(id);
     }
 }
