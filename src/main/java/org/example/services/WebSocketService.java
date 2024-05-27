@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class WebSocketService {
+
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
@@ -18,5 +19,4 @@ public class WebSocketService {
             System.err.println("Failed to send message: " + e.getMessage());
         }
     }
-
 }

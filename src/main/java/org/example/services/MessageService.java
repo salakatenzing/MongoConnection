@@ -1,5 +1,6 @@
 package org.example.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.repository.MessageRepository;
 import org.example.models.Message;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,15 +18,21 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     public void sendMessage(String content, String senderId, String channelId) {
         Message message = new Message(content, senderId, channelId);
 
-        // Serialize the message object or its content to JSON, if necessary
-        String messageJson = convertMessageToJson(message);
+        // Serialize the message object to JSON
+        String messageJson;
+        try {
+            messageJson = objectMapper.writeValueAsString(message);
+        } catch (Exception e) {
+            throw new RuntimeException("Could not convert message to JSON", e);
+        }
 
         // Send the message to Kafka
-        //kafkaTemplate sends messages to Kafka topics
-        kafkaTemplate.send("channelMessages", channelId, messageJson);
+        kafkaTemplate.send("chat-messages", messageJson);
 
         // Save the message to MongoDB
         messageRepository.save(message);
