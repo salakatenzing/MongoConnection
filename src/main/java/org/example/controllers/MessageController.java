@@ -29,5 +29,10 @@ public class MessageController {
         return repository.findById(id).orElse(null);
     }
 
+    @GetMapping("/channel/{channelId}")
+    public List<Message> getMessagesByChannelId(@PathVariable String channelId) {
+        return repository.findByChannelId(channelId);
+    }
+
     // Add more endpoints as needed for update and delete
 }
