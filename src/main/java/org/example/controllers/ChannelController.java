@@ -1,7 +1,7 @@
 package org.example.controllers;
 
 import org.example.models.Channel;
-import org.example.services.ChannelService;
+import org.example.repository.ChannelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,30 +12,31 @@ import java.util.List;
 public class ChannelController {
 
     @Autowired
-    private ChannelService channelService;
+    private ChannelRepository channelRepository;
 
     @GetMapping
     public List<Channel> getAllChannels() {
-        return channelService.findAll();
+        return channelRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Channel getChannelById(@PathVariable String id) {
-        return channelService.findById(id);
+        return channelRepository.findById(id).orElse(null);
     }
 
     @PostMapping
     public Channel createChannel(@RequestBody Channel channel) {
-        return channelService.create(channel);
+        return channelRepository.save(channel);
     }
 
     @PutMapping("/{id}")
     public Channel updateChannel(@PathVariable String id, @RequestBody Channel channel) {
-        return channelService.update(id, channel);
+        channel.setId(id);
+        return channelRepository.save(channel);
     }
 
     @DeleteMapping("/{id}")
     public void deleteChannel(@PathVariable String id) {
-        channelService.delete(id);
+        channelRepository.deleteById(id);
     }
 }
