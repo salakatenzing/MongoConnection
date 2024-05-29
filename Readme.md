@@ -2,5 +2,9 @@ Initial demo of real time chat with Kafka consumers listeninig to display messag
 
 
 
-https://github.com/salakatenzing/MongoConnection/assets/20289725/c1e42fe9-1d4f-4634-8b3c-a9eb3caf26b1
+
+
+
+
+https://github.com/salakatenzing/MongoConnection/assets/20289725/9eb33f9c-2e45-46d7-99b3-702ed6d971f5
 
