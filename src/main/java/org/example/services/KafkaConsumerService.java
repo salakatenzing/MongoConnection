@@ -14,13 +14,29 @@ public class KafkaConsumerService {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @KafkaListener(topics = "chat-messages", groupId = "chat-app")
-    public void handleMessageFromKafka(String messageJson) {
-        try {
-            Message message = objectMapper.readValue(messageJson, Message.class);
-            webSocketService.broadcastMessage("/topic/messages", message);
-        } catch (Exception e) {
-            e.printStackTrace();
+//    @KafkaListener(topics = "messages", groupId = "chat-app")
+//    public void handleMessageFromKafka(String messageJson) {
+//        try {
+////            System.out.println("Received Kafka message: " + messageJson); // Log the raw JSON
+//            Message message = objectMapper.readValue(messageJson, Message.class);
+////            System.out.println("Converted Message object: " + message); // Log the deserialized Message object
+//            webSocketService.broadcastMessage("/topic/messages", message);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
+@KafkaListener(topics = "messages", groupId = "chat-app")
+public void handleMessageFromKafka(String messageJson) {
+    try {
+        Message message = objectMapper.readValue(messageJson, Message.class);
+        if (message.getChannelId() != null) {
+            webSocketService.broadcastMessage(message.getChannelId(), message);
+        } else {
+            System.err.println("Channel ID is null for the message: " + messageJson);
         }
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+}
+
 }

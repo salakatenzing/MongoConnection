@@ -32,7 +32,9 @@ public class MessageService {
         }
 
         // Send the message to Kafka
-        kafkaTemplate.send("chat-messages", messageJson);
+//        kafkaTemplate.send("chat-messages", messageJson);
+        kafkaTemplate.send("messages", messageJson);
+
 
         // Save the message to MongoDB
         messageRepository.save(message);
