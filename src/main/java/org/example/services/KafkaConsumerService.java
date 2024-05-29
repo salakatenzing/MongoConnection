@@ -39,4 +39,6 @@ public void handleMessageFromKafka(String messageJson) {
     }
 }
 
+
+
 }
