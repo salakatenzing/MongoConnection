@@ -34,5 +34,5 @@ public class MessageController {
         return repository.findByChannelId(channelId);
     }
 
-    // Add more endpoints as needed for update and delete
+
 }
