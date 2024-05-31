@@ -40,13 +40,13 @@ public void broadcastMessage(String channelId, Message message) {
 //    }
 //}
 //
-//public void broadcastChannelUpdate(String destination, Channel channel) {
-//        try {
-//            messagingTemplate.convertAndSend(destination, channel);
-//        } catch (Exception e) {
-//            System.err.println("Failed to send channel update: " + e.getMessage());
-//        }
-//}
+public void broadcastChannelUpdate(String destination, Channel channel) {
+        try {
+            messagingTemplate.convertAndSend(destination, channel);
+        } catch (Exception e) {
+            System.err.println("Failed to send channel update: " + e.getMessage());
+        }
+}
 
 
 
